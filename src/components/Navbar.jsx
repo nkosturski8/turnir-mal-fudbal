@@ -22,90 +22,74 @@ export default function Navbar() {
     }`
 
   return (
-    <nav className="bg-pitch-700 text-white shadow-md sticky top-0 z-30">
+    <nav className="sticky top-0 z-30 bg-transparent md:bg-pitch-700 md:text-white md:shadow-md">
       <div className="max-w-5xl mx-auto px-4">
-        <div className="flex items-center justify-between h-14">
-          <NavLink to="/" className="font-bold tracking-tight flex items-center gap-2">
-            <span className="text-xl">⚽</span>
-            <span className="hidden sm:inline">БОРИС ТРАЈКОВСКИ</span>
-            <span className="sm:hidden">Турнир</span>
-          </NavLink>
-
-          {/* Десктоп мени */}
-          <div className="hidden md:flex items-center gap-1">
-            {links.map((l) => (
-              <NavLink key={l.to} to={l.to} end={l.end} className={linkClass}>
-                {l.label}
-              </NavLink>
-            ))}
-            {user ? (
-              <>
-                <NavLink to="/admin" className={linkClass}>
-                  Админ
-                </NavLink>
-                <button
-                  onClick={signOut}
-                  className="ml-1 px-3 py-2 rounded-md text-sm bg-pitch-900 hover:bg-black/40"
-                >
-                  Одјава
-                </button>
-              </>
-            ) : (
-              <NavLink to="/admin/najava" className={linkClass}>
+        {/* Десктоп мени — центрирано */}
+        <div className="hidden md:flex items-center justify-center gap-1 h-14">
+          {links.map((l) => (
+            <NavLink key={l.to} to={l.to} end={l.end} className={linkClass}>
+              {l.label}
+            </NavLink>
+          ))}
+          {user && (
+            <>
+              <NavLink to="/admin" className={linkClass}>
                 Админ
               </NavLink>
-            )}
-          </div>
-
-          {/* Мобилно копче */}
-          <button
-            className="md:hidden p-2 rounded hover:bg-pitch-600"
-            onClick={() => setOpen((o) => !o)}
-            aria-label="Мени"
-          >
-            <div className="w-6 h-0.5 bg-white mb-1.5" />
-            <div className="w-6 h-0.5 bg-white mb-1.5" />
-            <div className="w-6 h-0.5 bg-white" />
-          </button>
-        </div>
-
-        {/* Мобилно мени */}
-        {open && (
-          <div className="md:hidden pb-3 flex flex-col gap-1">
-            {links.map((l) => (
-              <NavLink
-                key={l.to}
-                to={l.to}
-                end={l.end}
-                className={linkClass}
-                onClick={() => setOpen(false)}
+              <button
+                onClick={signOut}
+                className="ml-1 px-3 py-2 rounded-md text-sm bg-pitch-900 hover:bg-black/40"
               >
-                {l.label}
-              </NavLink>
-            ))}
-            {user ? (
-              <>
-                <NavLink to="/admin" className={linkClass} onClick={() => setOpen(false)}>
-                  Админ панел
-                </NavLink>
-                <button
-                  onClick={() => {
-                    signOut()
-                    setOpen(false)
-                  }}
-                  className="text-left px-3 py-2 rounded-md text-sm bg-pitch-900"
-                >
-                  Одјава
-                </button>
-              </>
-            ) : (
-              <NavLink to="/admin/najava" className={linkClass} onClick={() => setOpen(false)}>
-                Админ најава
-              </NavLink>
-            )}
-          </div>
-        )}
+                Одјава
+              </button>
+            </>
+          )}
+        </div>
       </div>
+
+      {/* Мобилно копче — горе десно, лебди врз заглавието */}
+      <button
+        className="md:hidden absolute top-2.5 right-3 z-40 flex items-center gap-1.5 px-3 py-2 rounded-md text-white bg-pitch-900/50 hover:bg-pitch-900/70 backdrop-blur-sm text-sm font-medium"
+        onClick={() => setOpen((o) => !o)}
+        aria-label="Мени"
+        aria-expanded={open}
+      >
+        <span className="text-lg leading-none">{open ? '✕' : '☰'}</span>
+        Мени
+      </button>
+
+      {/* Мобилно мени — паѓачки панел десно */}
+      {open && (
+        <div className="md:hidden absolute top-14 right-3 z-40 w-52 rounded-lg bg-pitch-700 text-white shadow-xl ring-1 ring-black/20 p-2 flex flex-col gap-1">
+          {links.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.end}
+              className={linkClass}
+              onClick={() => setOpen(false)}
+            >
+              {l.label}
+            </NavLink>
+          ))}
+          {user && (
+            <>
+              <NavLink to="/admin" className={linkClass} onClick={() => setOpen(false)}>
+                Админ панел
+              </NavLink>
+              <button
+                onClick={() => {
+                  signOut()
+                  setOpen(false)
+                }}
+                className="text-left px-3 py-2 rounded-md text-sm bg-pitch-900"
+              >
+                Одјава
+              </button>
+            </>
+          )}
+        </div>
+      )}
     </nav>
   )
 }
