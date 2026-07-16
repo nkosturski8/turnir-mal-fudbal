@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import StandingsTable from '../components/StandingsTable'
+import ThirdPlaceTable from '../components/ThirdPlaceTable'
 import { Loading, ErrorBox, PageTitle } from '../components/States'
 import { supabase } from '../lib/supabaseClient'
 import { GROUPS } from '../lib/constants'
+import { thirdPlacedRanking } from '../lib/standings'
 
 export default function Groups() {
   const [rows, setRows] = useState([])
@@ -30,12 +32,14 @@ export default function Groups() {
   if (loading) return <Loading />
   if (error) return <ErrorBox error={error} />
 
+  const thirdPlaced = thirdPlacedRanking(rows)
+
   return (
     <div>
       <PageTitle sub="Бодови се доделуваат: победа 3, нерешено 1, пораз 0.">
         Табели по групи
       </PageTitle>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {GROUPS.map((g) => (
           <StandingsTable
             key={g}
@@ -43,6 +47,10 @@ export default function Groups() {
             rows={rows.filter((r) => r.group_name === g)}
           />
         ))}
+      </div>
+
+      <div className="mt-6">
+        <ThirdPlaceTable rows={thirdPlaced} />
       </div>
     </div>
   )

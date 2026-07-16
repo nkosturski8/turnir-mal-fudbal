@@ -66,7 +66,7 @@ export default function Bracket() {
       <PageTitle sub="Четвртфинале · Полуфинале · Финале">Елиминации</PageTitle>
 
       {stagesWithMatches.length === 0 ? (
-        <Empty text="Елиминационите мечеви ќе се појават откако админот ќе ги додаде." />
+        <Empty text="Елиминационите мечеви ќе се објават откако ќе заврши групната фаза." />
       ) : (
         <div className="overflow-x-auto pb-2">
           <div className="flex gap-4 min-w-max">

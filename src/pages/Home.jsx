@@ -51,7 +51,7 @@ export default function Home() {
   return (
     <div className="space-y-8">
       {matches.length === 0 && (
-        <Empty text="Сè уште нема закажани мечеви. Админот може да ги додаде од админ панелот." />
+        <Empty text="Сè уште нема распоред со мечеви." />
       )}
 
       {live.length > 0 && (

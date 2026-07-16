@@ -40,7 +40,7 @@ export default function TopScorers() {
       </PageTitle>
 
       {rows.length === 0 ? (
-        <Empty text="Сè уште нема постигнато голови." />
+        <Empty text="Натпреварите сè уште не се започнати. Листата ќе се ажурира откако ќе има податоци." />
       ) : (
         <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
           <table className="w-full text-sm">

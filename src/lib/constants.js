@@ -4,8 +4,13 @@ export const TOURNAMENT_NAME =
   'Турнир во мал фудбал „БОРИС ТРАЈКОВСКИ“'
 export const TOURNAMENT_PLACE = 'Моноспитово'
 
-export const GROUPS = ['A', 'B', 'C', 'D']
+export const GROUPS = ['A', 'B', 'C']
 export const MAX_PLAYERS_PER_TEAM = 10
+
+// Од секоја група директно продолжуваат првите 2 тима...
+export const QUALIFY_PER_GROUP = 2
+// ...плус најдобрите 2 меѓу третопласираните (вкупно 8 за четвртфинале).
+export const THIRD_PLACE_QUALIFIERS = 2
 
 export const STAGES = [
   { value: 'group', label: 'Групна фаза' },

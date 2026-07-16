@@ -15,8 +15,8 @@ dist-ssr
 # Тајни клучеви — не се прикачуваат на Git
 .env
 
-# Supabase шема — не се прикачува на Git
-supabase/schema.sql
+# Supabase шема и миграции — не се прикачуваат на Git
+supabase/
 
 # Editor directories and files
 .vscode/*
