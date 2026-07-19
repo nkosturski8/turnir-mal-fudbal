@@ -158,6 +158,36 @@ export default function AdminMatches() {
   )
 }
 
+// Поле за резултат: при допир полето се празни за да внесеш нова бројка од нула
+// (без да се лепи пред постоечката 0). Ако излезеш без да внесеш, се враќа старата вредност.
+function ScoreInput({ value, onChange }) {
+  const [focused, setFocused] = useState(false)
+  const [draft, setDraft] = useState('')
+
+  const shown = focused ? draft : value === 0 ? '' : String(value)
+
+  return (
+    <input
+      type="number"
+      min="0"
+      inputMode="numeric"
+      value={shown}
+      placeholder="0"
+      onFocus={() => {
+        setDraft('')
+        setFocused(true)
+      }}
+      onBlur={() => setFocused(false)}
+      onChange={(e) => {
+        const v = e.target.value.replace(/^0+(?=\d)/, '') // тргни водечки нули
+        setDraft(v)
+        onChange(v === '' ? 0 : Number(v))
+      }}
+      className="w-16 h-14 text-center text-2xl font-bold rounded-lg border border-slate-300 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-pitch-500"
+    />
+  )
+}
+
 function MatchEditor({ m, teams = [], onSave, onDelete }) {
   const [home, setHome] = useState(m.home_score)
   const [away, setAway] = useState(m.away_score)
@@ -289,9 +319,9 @@ function MatchEditor({ m, teams = [], onSave, onDelete }) {
 
       <div className="grid grid-cols-[1fr_auto_auto_auto_1fr] items-center gap-2">
         <span className="text-right text-sm font-medium">{homeName}</span>
-        <Input type="number" min="0" value={home} onChange={(e) => setHome(Number(e.target.value))} className="w-16 text-center" />
-        <span className="text-slate-400">:</span>
-        <Input type="number" min="0" value={away} onChange={(e) => setAway(Number(e.target.value))} className="w-16 text-center" />
+        <ScoreInput value={home} onChange={setHome} />
+        <span className="text-slate-400 text-xl font-bold">:</span>
+        <ScoreInput value={away} onChange={setAway} />
         <span className="text-left text-sm font-medium">{awayName}</span>
       </div>
 
