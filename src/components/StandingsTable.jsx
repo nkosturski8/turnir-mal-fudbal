@@ -1,5 +1,5 @@
 import { sortStandings } from '../lib/standings'
-import { QUALIFY_PER_GROUP } from '../lib/constants'
+import { QUALIFY_PER_GROUP, groupLabel } from '../lib/constants'
 
 // rows: редови од погледот group_standings за една група
 export default function StandingsTable({ groupName, rows }) {
@@ -8,7 +8,7 @@ export default function StandingsTable({ groupName, rows }) {
   return (
     <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
       <div className="px-4 py-2 bg-pitch-700 text-white font-bold">
-        Група {groupName}
+        Група {groupLabel(groupName)}
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">

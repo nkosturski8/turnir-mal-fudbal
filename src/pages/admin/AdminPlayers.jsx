@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
-import { MAX_PLAYERS_PER_TEAM } from '../../lib/constants'
+import { MAX_PLAYERS_PER_TEAM, groupLabel } from '../../lib/constants'
 import { Input, Select, Field, Button, Card } from '../../components/form'
 import { ErrorBox } from '../../components/States'
 
@@ -80,7 +80,7 @@ export default function AdminPlayers() {
             {teams.length === 0 && <option value="">Прво додај тимови</option>}
             {teams.map((t) => (
               <option key={t.id} value={t.id}>
-                {t.name} (Група {t.group_name})
+                {t.name} (Група {groupLabel(t.group_name)})
               </option>
             ))}
           </Select>

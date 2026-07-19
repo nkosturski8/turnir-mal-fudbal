@@ -1,4 +1,4 @@
-import { THIRD_PLACE_QUALIFIERS } from '../lib/constants'
+import { THIRD_PLACE_QUALIFIERS, groupLabel } from '../lib/constants'
 
 // rows: веќе рангирани третопласирани тимови (види lib/standings.js)
 export default function ThirdPlaceTable({ rows }) {
@@ -31,7 +31,7 @@ export default function ThirdPlaceTable({ rows }) {
               >
                 <td className="px-3 py-2 text-slate-400">{i + 1}</td>
                 <td className="px-3 py-2 font-medium text-slate-800">{r.team_name}</td>
-                <td className="px-2 py-2 text-center text-slate-600">{r.group_name}</td>
+                <td className="px-2 py-2 text-center text-slate-600">{groupLabel(r.group_name)}</td>
                 <td className="px-2 py-2 text-center text-slate-600">{r.played}</td>
                 <td className="px-2 py-2 text-center text-slate-600">{r.goals_for}</td>
                 <td className="px-2 py-2 text-center text-slate-600">{r.goals_against}</td>

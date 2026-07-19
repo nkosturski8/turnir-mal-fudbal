@@ -5,6 +5,11 @@ export const TOURNAMENT_NAME =
 export const TOURNAMENT_PLACE = 'Моноспитово'
 
 export const GROUPS = ['A', 'B', 'C']
+
+// Прикажани (кирилични) имиња на групите. Во базата остануваат A/B/C.
+export const GROUP_LABELS = { A: 'А', B: 'Б', C: 'Ц' }
+export const groupLabel = (g) => GROUP_LABELS[g] ?? g ?? ''
+
 export const MAX_PLAYERS_PER_TEAM = 10
 
 // Од секоја група директно продолжуваат првите 2 тима...

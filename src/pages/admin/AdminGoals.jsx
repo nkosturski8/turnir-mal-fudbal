@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
 import { MATCH_SELECT } from '../../lib/queries'
-import { STAGE_LABELS } from '../../lib/constants'
+import { STAGE_LABELS, groupLabel } from '../../lib/constants'
 import { Input, Select, Field, Button, Card } from '../../components/form'
 import { ErrorBox } from '../../components/States'
 
@@ -95,7 +95,7 @@ export default function AdminGoals() {
 
   const label = (m) =>
     `${m.home_team?.name ?? 'ТБД'} — ${m.away_team?.name ?? 'ТБД'} · ${
-      m.stage === 'group' ? 'Група ' + (m.group_name ?? '') : STAGE_LABELS[m.stage]
+      m.stage === 'group' ? 'Група ' + groupLabel(m.group_name) : STAGE_LABELS[m.stage]
     }`
 
   return (

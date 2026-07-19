@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabaseClient'
-import { GROUPS } from '../../lib/constants'
+import { GROUPS, groupLabel } from '../../lib/constants'
 import { Input, Select, Field, Button, Card } from '../../components/form'
 import { Loading, ErrorBox } from '../../components/States'
 
@@ -68,7 +68,7 @@ export default function AdminTeams() {
           <Field label="Група">
             <Select value={group} onChange={(e) => setGroup(e.target.value)}>
               {GROUPS.map((g) => (
-                <option key={g} value={g}>Група {g}</option>
+                <option key={g} value={g}>Група {groupLabel(g)}</option>
               ))}
             </Select>
           </Field>
@@ -80,7 +80,7 @@ export default function AdminTeams() {
               key={g}
               className={`px-2 py-1 rounded-full ${n === 4 ? 'bg-pitch-100 text-pitch-800' : 'bg-slate-100 text-slate-500'}`}
             >
-              Група {g}: {n}/4
+              Група {groupLabel(g)}: {n}/4
             </span>
           ))}
           <span className="px-2 py-1 rounded-full bg-slate-100 text-slate-500">
@@ -112,7 +112,7 @@ export default function AdminTeams() {
                   className="w-32"
                 >
                   {GROUPS.map((g) => (
-                    <option key={g} value={g}>Група {g}</option>
+                    <option key={g} value={g}>Група {groupLabel(g)}</option>
                   ))}
                 </Select>
                 <Button variant="danger" onClick={() => removeTeam(t.id)}>Избриши</Button>

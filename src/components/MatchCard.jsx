@@ -1,4 +1,4 @@
-import { STAGE_LABELS, STATUS_LABELS, formatDate } from '../lib/constants'
+import { STAGE_LABELS, STATUS_LABELS, formatDate, groupLabel } from '../lib/constants'
 
 // match: { ...matchRow, home_team, away_team }  (home_team/away_team = {name})
 // homeScorers / awayScorers: [{ name, minute }]
@@ -14,7 +14,7 @@ export default function MatchCard({ match, homeScorers = [], awayScorers = [] })
 
   const label =
     match.stage === 'group'
-      ? `Група ${match.group_name ?? ''}${match.round_label ? ' · ' + match.round_label : ''}`
+      ? `Група ${groupLabel(match.group_name)}${match.round_label ? ' · ' + match.round_label : ''}`
       : STAGE_LABELS[match.stage] ?? ''
 
   return (

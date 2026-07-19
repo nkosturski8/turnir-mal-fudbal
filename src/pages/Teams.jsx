@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Loading, ErrorBox, Empty, PageTitle } from '../components/States'
 import { supabase } from '../lib/supabaseClient'
-import { GROUPS } from '../lib/constants'
+import { GROUPS, groupLabel } from '../lib/constants'
 
 export default function Teams() {
   const [teams, setTeams] = useState([])
@@ -49,7 +49,7 @@ export default function Teams() {
         if (groupTeams.length === 0) return null
         return (
           <section key={g}>
-            <h3 className="text-lg font-bold text-pitch-700 mb-3">Група {g}</h3>
+            <h3 className="text-lg font-bold text-pitch-700 mb-3">Група {groupLabel(g)}</h3>
             <div className="grid gap-4 sm:grid-cols-2">
               {groupTeams.map((t) => (
                 <div key={t.id} className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
